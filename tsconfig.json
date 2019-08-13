@@ -1,0 +1,39 @@
+{
+    "compilerOptions": {
+        "lib": [
+            "es2018"
+        ],
+        "allowUnusedLabels": false,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "target": "es6",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "outDir": "./dist",
+        "baseUrl": "./src/",
+        "noLib": false,
+        "strict": true,
+        "allowSyntheticDefaultImports": true,
+        "newLine": "LF",
+        "pretty": true,
+        "allowJs": true,
+        "checkJs": true,
+        "sourceMap": true,
+        "removeComments": true,
+        //"resolveJsonModule": true,
+        //helmet
+        "esModuleInterop": true,
+        //helmet
+        // typeorm
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true
+        // typeorm
+    },
+    "include": [
+        "src/**/*"
+    ],
+    "exclude": [
+        "node_modules",
+        "dist"
+    ]
+}

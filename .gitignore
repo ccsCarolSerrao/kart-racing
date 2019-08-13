@@ -1,0 +1,57 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+dist
+dist-*
+tmp
+out-tsc
+
+# dependencies
+node_modules
+package-lock.json
+
+# IDEs and editors
+.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+testem.log
+*.log
+/typings
+
+# e2e
+/e2e/*.js
+/e2e/*.map
+
+# System Files
+.DS_Store
+Thumbs.db
+
+/src/assets/data/press/files/*.pdf
+.scannerwork
+tests-report/
+src/app/ticket/ra-responde_bkp.scss
+src/app/ticket/ra-responde.css
+src/polyfills-ie.min.js
+
+#serverless
+.serverless
+
+#dot-env
+.env
+
+#typeorm
+ormconfig.json

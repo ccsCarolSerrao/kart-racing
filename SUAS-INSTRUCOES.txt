@@ -1,0 +1,51 @@
+1 - Ao copiar o arquivo de log disponibilizado percebi que o mesmo encontra-se desformatado.
+    Desta forma criei um padrão para o upload do arquivo.
+
+2 - A posição inicial e final de cada campo deverá ser respeitada.
+
+3 - A nomenclatura do cabeçalho deverá ser respeitada.
+
+5 - A extensão do arquivo deverá ser *.log.
+
+4 - Padrão dos campos do arquivo:
+    -   Hora
+        - Header:   TIME
+        - Size:     12
+        - Start:    0
+        - End:      11
+        - Example:  23:59:59.999
+
+    -   Piloto (CODE)
+        - Header:   CODE
+        - Size:     3
+        - Start:    12
+        - End:      14
+        - Example:  999
+
+    -   Piloto (NAME)
+        - Header:   NAME
+        - Size:     40
+        - Start:    18 # Ignora o caracter ' - '
+        - End:      57
+        - Example:  Carolina Serrão
+
+    -   Nº Volta
+        - Header:   LAP
+        - Size:     2
+        - Start:    58
+        - End:      59
+        - Example:  99
+
+    -   Tempo Volta
+        - Header:   LAP_TIME
+        - Size:     9
+        - Start:    60
+        - End:      69
+        - Example:  59:59.999
+
+    -   Velocidade média da volta
+        - Header:   LAP_SPEED
+        - Size:     7
+        - Start:    70
+        - End:      76
+        - Example:  999,999
