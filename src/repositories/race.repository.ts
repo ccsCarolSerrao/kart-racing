@@ -1,11 +1,12 @@
 import { RaceRepositoryInteface } from './race.repository.interface'
 import { RaceModel } from '../models/race.model'
-import { Repository, getConnection } from 'typeorm';
+import { Repository, getConnection } from 'typeorm'
 
 export class RaceRepository implements RaceRepositoryInteface {
-    private repository: Repository<RaceModel> = new Repository<RaceModel>()
-    inicialize = () => {
-        if (this.repository == undefined) {
+    private repository!: Repository<RaceModel>
+
+    private async inicialize(): Promise<void> {
+        if (this.repository === undefined) {
             const connection = getConnection()
             this.repository = connection.getRepository(RaceModel)
         }
@@ -13,29 +14,33 @@ export class RaceRepository implements RaceRepositoryInteface {
 
     /**
      * Add a new race
-     * @param newRace Race object
+     * @param race Race object
      */
-    async Add(newRace: RaceModel): Promise<RaceModel> {
-        this.inicialize()
-        return await this.repository.save(newRace)
+    async Save(race: RaceModel): Promise<RaceModel> {
+        await this.inicialize()
+        return await this.repository.save(race)
     }
 
     /**
      * Update an race
-     * @param newRace Race object
+     * @param race Race object
      */
-    async Update(newRace: RaceModel): Promise<RaceModel> {
-        this.inicialize()
+    async Update(race: RaceModel): Promise<RaceModel> {
+        await this.inicialize()
+        // immutability
+        const newRace: RaceModel = Object.assign({}, race)
         await this.repository.update({ id: newRace.id }, newRace)
         return newRace
     }
 
     /**
      * Delete an race
-     * @param newRace Race object
+     * @param race Race object
      */
-    async Delete(newRace: RaceModel): Promise<RaceModel> {
-        this.inicialize()
+    async Delete(race: RaceModel): Promise<RaceModel> {
+        await this.inicialize()
+        // immutability
+        const newRace: RaceModel = Object.assign({}, race)
         await this.repository.delete(newRace)
         return newRace
     }
@@ -44,7 +49,7 @@ export class RaceRepository implements RaceRepositoryInteface {
      * Get all races
      */
     async GetAll(): Promise<RaceModel[]> {
-        this.inicialize()
+        await this.inicialize()
         return await this.repository.find()
     }
 
@@ -53,8 +58,17 @@ export class RaceRepository implements RaceRepositoryInteface {
      * @param id Race id
      */
     async FindById(id: number): Promise<RaceModel | undefined> {
-        this.inicialize()
-        return await this.repository.findOne(id)
+        await this.inicialize()
+        return await this.repository.findOneOrFail(id)
+    }
+
+    /**
+     * Find an race by filename
+     * @param fileName Race file name
+     */
+    async FindByFileName(fileName: string): Promise<RaceModel | undefined> {
+        await this.inicialize()
+        return await this.repository.findOneOrFail({ where: { fileName } })
     }
 
 }

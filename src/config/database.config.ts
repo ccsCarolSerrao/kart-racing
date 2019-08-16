@@ -18,7 +18,7 @@ export namespace DatabaseConfig {
             return [{
                 name: 'default',
                 type: 'sqlite',
-                database: path.resolve(__dirname, 'db', 'kartrace.sql'),
+                database: path.resolve(__dirname, '..', '..', 'db', 'kartrace.sql'),
                 logging: true,
                 synchronize: true,
                 migrationsRun: true,
@@ -33,11 +33,11 @@ export namespace DatabaseConfig {
             return [{
                 name: 'default',
                 type: 'mysql',
-                host: process.env.conn_host,
+                host: process.env.mysql_conn_host,
                 port: 3306,
-                username: process.env.conn_user,
-                password: process.env.conn_password,
-                database: process.env.conn_database,
+                username: process.env.mysql_conn_user,
+                password: process.env.mysql_conn_password,
+                database: process.env.mysql_conn_database,
                 logging: true,
                 synchronize: true,
                 migrationsRun: true,
@@ -47,7 +47,6 @@ export namespace DatabaseConfig {
                     entitiesDir,
                     migrationsDir,
                 },
-
             }]
         }
     }

@@ -39,6 +39,7 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+upload
 
 /src/assets/data/press/files/*.pdf
 .scannerwork
@@ -55,3 +56,4 @@ src/polyfills-ie.min.js
 
 #typeorm
 ormconfig.json
+db

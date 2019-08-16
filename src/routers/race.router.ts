@@ -2,10 +2,11 @@ import { Router } from 'express'
 import { LoggerUtil } from '../utils/logger.util'
 import { EnumsUtil } from '../utils/enums.util'
 import { RaceController } from '../controllers/race.controller'
+import multer from 'multer'
 
 class RaceRouter {
     public raceRouter = Router()
-
+    private upload: multer.Instance = multer({ dest: `upload/` })
     public constructor() {
         LoggerUtil.log(EnumsUtil.LogLevel.INFO, `... @RaceRouter/constructor()`)
         this.setUp()
@@ -14,20 +15,31 @@ class RaceRouter {
     public setUp(): void {
         LoggerUtil.log(EnumsUtil.LogLevel.INFO, `... @RaceRouter/setUp()`)
 
-        this.raceRouter.route('/v1/races')
-            .post(RaceController.save)
+        // insert race
+        this.raceRouter.route('/')
+            .post(RaceController.Save)
 
-        this.raceRouter.route('/v1/races/:raceId')
-            .post(RaceController.findById)
+        // insert race by uploading file
+        this.raceRouter.route('/upload')
+            .post(
+                this.upload.single('raceLog'),
+                RaceController.Upload)
 
-        this.raceRouter.route('/v1/races/:raceId/ranking')
-            .post(RaceController.ranking)
+        // find race by id
+        this.raceRouter.route('/:raceId')
+            .get(RaceController.FindById)
 
-        this.raceRouter.route('/v1/races/:raceId/pilots')
-            .post(RaceController.ranking)
+        // get race ranking
+        this.raceRouter.route('/:raceId/ranking')
+            .get(RaceController.FindRankingByRaceId)
 
-        this.raceRouter.route('/v1/races/:raceId/pilots/:pilotId')
-            .post(RaceController.ranking)
+        // get race best lap
+        this.raceRouter.route('/:raceId/best-lap')
+            .get(RaceController.FindBestLapByRaceId)
+
+        // list race pilots
+        this.raceRouter.route('/:raceId/pilots')
+            .get(RaceController.FindPilotsByRaceId)
     }
 }
 

@@ -11,9 +11,9 @@ export namespace TypeormConfig {
             for (const conn of connection) {
                 await conn.runMigrations()
             }
-        } catch (err) {
-            LoggerUtil.log(EnumsUtil.LogLevel.INFO, `... @TypeormConfig/createConnection()`, err)
-            return err
+        } catch (error) {
+            LoggerUtil.log(EnumsUtil.LogLevel.INFO, `... @TypeormConfig/createConnection()`, error)
+            return error
         }
     }
 }
