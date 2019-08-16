@@ -61,7 +61,7 @@ export class PilotRepository implements PilotRepositoryInteface {
      */
     async FindById(id: number): Promise<PilotModel | undefined> {
         await this.inicialize()
-        return await this.repository.findOneOrFail(id)
+        return await this.repository.findOne(id)
     }
 
     /**
@@ -71,7 +71,7 @@ export class PilotRepository implements PilotRepositoryInteface {
      */
     async FindByCode(code: number): Promise<PilotModel | undefined> {
         await this.inicialize()
-        return await this.repository.findOneOrFail({ where: { code } })
+        return await this.repository.findOne({ where: { code } })
     }
 
     /**
@@ -81,7 +81,7 @@ export class PilotRepository implements PilotRepositoryInteface {
      */
     async FindByIdAndRaceId(id: number, raceId: number): Promise<PilotModel | undefined> {
         await this.inicialize()
-        return await this.repository.findOneOrFail({ where: { id, raceId } })
+        return await this.repository.findOne({ where: { id, raceId } })
     }
 
     /**

@@ -61,7 +61,7 @@ export class LapRepository implements LapRepositoryInteface {
      */
     async FindById(id: number): Promise<LapModel | undefined> {
         await this.inicialize()
-        return await this.repository.findOneOrFail(id)
+        return await this.repository.findOne(id)
     }
 
     /**

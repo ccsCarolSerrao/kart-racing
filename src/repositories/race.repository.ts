@@ -59,7 +59,7 @@ export class RaceRepository implements RaceRepositoryInteface {
      */
     async FindById(id: number): Promise<RaceModel | undefined> {
         await this.inicialize()
-        return await this.repository.findOneOrFail(id)
+        return await this.repository.findOne(id)
     }
 
     /**
@@ -68,7 +68,7 @@ export class RaceRepository implements RaceRepositoryInteface {
      */
     async FindByFileName(fileName: string): Promise<RaceModel | undefined> {
         await this.inicialize()
-        return await this.repository.findOneOrFail({ where: { fileName } })
+        return await this.repository.findOne({ where: { fileName } })
     }
 
 }
