@@ -15,15 +15,11 @@ class RaceRouter {
     public setUp(): void {
         LoggerUtil.log(EnumsUtil.LogLevel.INFO, `... @RaceRouter/setUp()`)
 
-        // insert race
-        this.raceRouter.route('/')
-            .post(RaceController.Save)
-
         // insert race by uploading file
         this.raceRouter.route('/upload')
             .post(
                 this.upload.single('raceLog'),
-                RaceController.Upload)
+                RaceController.UploadAndSave)
 
         // find race by id
         this.raceRouter.route('/:raceId')
@@ -31,7 +27,7 @@ class RaceRouter {
 
         // get race ranking
         this.raceRouter.route('/:raceId/ranking')
-            .get(RaceController.FindRankingByRaceId)
+            .get(RaceController.GetRankingByRaceId)
 
         // get race best lap
         this.raceRouter.route('/:raceId/best-lap')

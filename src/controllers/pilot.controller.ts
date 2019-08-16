@@ -2,10 +2,9 @@ import { Request, Response, NextFunction } from 'express'
 import { PilotService } from '../services/pilot.service'
 
 export class PilotController {
-
     public static Save(_req: Request, res: Response, _next: NextFunction): Response | void {
 
-        return res.status(200).json({ message: 'OK' })
+        return res.status(200).json({ message: 'comming soon...' })
     }
 
     public static FindByPilotIdAndRaceId(req: Request, res: Response, next: NextFunction): Response | void {
@@ -14,7 +13,7 @@ export class PilotController {
             const pilotId: number = req.query.pilotId
             PilotService.FindByIdAndRaceId(pilotId, raceId)
 
-            return res.status(200).json({ message: 'OK' })
+            return res.status(200).json({ message: 'comming soon...' })
         } catch (error) {
             next(error)
         }
@@ -26,7 +25,7 @@ export class PilotController {
             const pilotId: number = req.query.pilotId
             PilotService.FindBestLapByIdAndRaceId(pilotId, raceId)
 
-            return res.status(200).json({ message: 'OK' })
+            return res.status(200).json({ message: 'comming soon...' })
         } catch (error) {
             next(error)
         }
@@ -38,7 +37,7 @@ export class PilotController {
             const pilotId: number = req.query.pilotId
             PilotService.FindSpeedAverageByIdAndRaceId(pilotId, raceId)
 
-            return res.status(200).json({ message: 'OK' })
+            return res.status(200).json({ message: 'comming soon...' })
         } catch (error) {
             next(error)
         }
@@ -50,7 +49,7 @@ export class PilotController {
             const pilotId: number = req.query.pilotId
             PilotService.FindTimeByIdAndRaceId(pilotId, raceId)
 
-            return res.status(200).json({ message: 'OK' })
+            return res.status(200).json({ message: 'comming soon...' })
         } catch (error) {
             next(error)
         }

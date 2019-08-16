@@ -3,7 +3,4 @@ import { RaceModel } from '../models/race.model'
 
 export interface RaceRepositoryInteface extends BaseRepositoryInterface<RaceModel> {
     FindByFileName(fileName: string): Promise<RaceModel | undefined>
-    // Promote(user: RaceModel): Promise<RaceModel>;
-    // Activate(user: RaceModel): Promise<RaceModel>;
-    // Inactivate(user: RaceModel): Promise<RaceModel>;
 }

@@ -1,6 +1,8 @@
 import { PilotRepositoryInteface } from './pilot.repository.interface'
 import { PilotModel } from '../models/pilot.model'
 import { Repository, getConnection } from 'typeorm'
+import { LapModel } from '../models/lap.model'
+import { RaceModel } from '../models/race.model'
 
 export class PilotRepository implements PilotRepositoryInteface {
     private repository!: Repository<PilotModel>
@@ -88,7 +90,7 @@ export class PilotRepository implements PilotRepositoryInteface {
      */
     async FindByRaceId(raceId: number): Promise<PilotModel[]> {
         await this.inicialize()
-        return await this.repository.find({ where: { raceId } })
+        return await this.repository.find({ where: { raceId , relations: [LapModel, RaceModel] }})
     }
 
 }

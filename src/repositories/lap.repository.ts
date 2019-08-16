@@ -1,6 +1,8 @@
 import { LapRepositoryInteface } from './lap.repository.interface'
 import { LapModel } from '../models/lap.model'
 import { Repository, getConnection } from 'typeorm'
+import { PilotModel } from '../models/pilot.model'
+import { RaceModel } from '../models/race.model'
 
 export class LapRepository implements LapRepositoryInteface {
     private repository!: Repository<LapModel>
@@ -60,6 +62,20 @@ export class LapRepository implements LapRepositoryInteface {
     async FindById(id: number): Promise<LapModel | undefined> {
         await this.inicialize()
         return await this.repository.findOneOrFail(id)
+    }
+
+    /**
+     * Find an lap by race id
+     * @param raceId Race id
+     */
+    async FindByRaceId(raceId: number): Promise<LapModel[]> {
+        await this.inicialize()
+        return await this.repository.find({
+            where: {
+                raceId,
+                relations: [PilotModel, RaceModel],
+            },
+        })
     }
 
 }

@@ -22,11 +22,11 @@ export class LapModel {
     @Column({ name: 'lap_create_date', type: 'datetime', nullable: false })
     createDate: Date
 
-    @ManyToOne(() => PilotModel)
+    @ManyToOne(() => PilotModel, { eager: true})
     @JoinColumn({ name: 'pilo_id' })
     pilot: PilotModel
 
-    @ManyToOne(() => RaceModel)
+    @ManyToOne(() => RaceModel, { eager: true})
     @JoinColumn({ name: 'race_id' })
     raceId: number
 
