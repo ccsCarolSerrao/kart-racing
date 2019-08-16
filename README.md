@@ -1,12 +1,16 @@
 # Kart Racing
-  
-  
+
+
+
+
+
 ## What is the challenge?
   
 Read [HERE](https://github.com/Gympass/interview-test)!
 
-  
-  
+
+
+
 ## To run this project:
   
 1) Clone the repository
@@ -28,16 +32,19 @@ git clone https://github.com/ccsCarolSerrao/kart-racing.git
     yarn start-server
 ```
 6) Have a lot of fun!
-  
-  
+
+
+
+
 
 ## Let's try!!
   
 ### POST Upload Race Log
 _Don't forget to change the file path. =D_
 ```
-curl --location --request POST "localhost:3000/api/v1/races/upload" --form "raceLog=@<localPath>/kart-racing/mocks/race.log"
+curl --location --request POST "localhost:3000/api/v1/races/upload" --form "raceLog=@<localPath>/race.log"
 ```
+
 
 
 ### GET RankingRace

@@ -7,7 +7,7 @@ export class PilotController {
         return res.status(200).json({ message: 'comming soon...' })
     }
 
-    public static FindByPilotIdAndRaceId(req: Request, res: Response, next: NextFunction): Response | void {
+    public static FindByIdAndRaceId(req: Request, res: Response, next: NextFunction): Response | void {
         try {
             const raceId: number = req.query.raceId
             const pilotId: number = req.query.pilotId
@@ -19,7 +19,7 @@ export class PilotController {
         }
     }
 
-    public static FindBestLapByPilotIdAndRaceId(req: Request, res: Response, next: NextFunction): Response | void {
+    public static FindBestLapByIdAndRaceId(req: Request, res: Response, next: NextFunction): Response | void {
         try {
             const raceId: number = req.query.raceId
             const pilotId: number = req.query.pilotId
@@ -31,7 +31,7 @@ export class PilotController {
         }
     }
 
-    public static FindSpeedAverageByPilotIdAndRaceId(req: Request, res: Response, next: NextFunction): Response | void {
+    public static FindSpeedAverageByIdAndRaceId(req: Request, res: Response, next: NextFunction): Response | void {
         try {
             const raceId: number = req.query.raceId
             const pilotId: number = req.query.pilotId
@@ -43,7 +43,7 @@ export class PilotController {
         }
     }
 
-    public static FindTimeByPilotIdAndRaceId(req: Request, res: Response, next: NextFunction): Response | void {
+    public static FindTimeByIdAndRaceId(req: Request, res: Response, next: NextFunction): Response | void {
         try {
             const raceId: number = req.query.raceId
             const pilotId: number = req.query.pilotId

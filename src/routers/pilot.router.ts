@@ -20,19 +20,19 @@ class PilotRouter {
 
         // list pilot pilot by id
         this.pilotRouter.route('/:pilotId/races/:raceId')
-            .get(PilotController.FindByPilotIdAndRaceId)
+            .get(PilotController.FindByIdAndRaceId)
 
         // list pilot best lap pilot by id
         this.pilotRouter.route('/:pilotId/races/:raceId/best-lap')
-            .get(PilotController.FindBestLapByPilotIdAndRaceId)
+            .get(PilotController.FindBestLapByIdAndRaceId)
 
         // list pilot speed average pilot by id
         this.pilotRouter.route('/:pilotId/races/:raceId/speed-average')
-            .get(PilotController.FindSpeedAverageByPilotIdAndRaceId)
+            .get(PilotController.FindSpeedAverageByIdAndRaceId)
 
         // list pilot time after winner by id
         this.pilotRouter.route('/:pilotId/races/:raceId/time-after-winner')
-            .get(PilotController.FindTimeByPilotIdAndRaceId)
+            .get(PilotController.FindTimeByIdAndRaceId)
     }
 }
 
