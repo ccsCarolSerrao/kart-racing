@@ -15,7 +15,7 @@ Read [HERE](https://github.com/Gympass/interview-test)!
   
 1) Clone the repository
 ```
-git clone https://github.com/ccsCarolSerrao/kart-racing.git
+    git clone https://github.com/ccsCarolSerrao/kart-racing.git
 ```
 2) Open in the Visual Studio Code (or another IDE of your choice)
 3) Install [Yarn](https://yarnpkg.com/pt-BR/) in your machine
@@ -27,11 +27,12 @@ git clone https://github.com/ccsCarolSerrao/kart-racing.git
 ```
     yarn
 ```
-5) Start server:
+5) Configure your .env file
+6) Start server:
 ```
     yarn start-server
 ```
-6) Have a lot of fun!
+7) Have a lot of fun!
 
 
 

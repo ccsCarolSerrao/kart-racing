@@ -8,7 +8,6 @@ import { RaceRepository } from '../repositories/race.repository'
 import { FieldConfigInterface, FileLineInterface } from '../interfaces/file.interface'
 import { RankinInterface, PilotRankinInterface } from '../interfaces/ranking.interface'
 import { TimeUtil } from '../utils/time.util'
-import { RaceUtil } from '../utils/race.util'
 
 export class RaceService {
 
@@ -51,9 +50,9 @@ export class RaceService {
             const pilotLaps: LapModel[] = laps.filter(x => x.pilot.id! === pilot.id!)
 
             // if the pilot made less then RaceUtil.LAPS_TO_WIN, he is a looser
-            if (pilotLaps.length < +RaceUtil.LAPS_TO_WIN) {
-                break
-            }
+            // if (pilotLaps.length < +RaceUtil.LAPS_TO_WIN) {
+            //     break
+            // }
 
             // count time lap by pilot
             const times: number[] = pilotLaps.map(p => TimeUtil.ConvertTimeToMilliseconds(p.lapTime))
@@ -68,10 +67,15 @@ export class RaceService {
             pilotsRanking.push(pilotRank)
         }
 
+        const pilotsRankingSorted: PilotRankinInterface[] = pilotsRanking.slice(0)
         // order by max lap and min time lap
-        pilotsRanking.sort((t1, t2) => +t1.totalTime - +t2.totalTime)
+        pilotsRankingSorted.sort((p1, p2): number => {
+            if (+p1.totalLaps >= +p2.totalLaps && +p1.totalTime < +p2.totalTime) return -1
+            if (+p1.totalLaps <= +p2.totalLaps && +p1.totalTime > +p2.totalTime) return 1
+            return 0
+        })
 
-        pilotsRanking.map((pilot, i = 0) => {
+        const newPilotsRanking: PilotRankinInterface[] = pilotsRankingSorted.map((pilot, i = 0) => {
             i++
             pilot.position = i
             pilot.totalTime = TimeUtil.ConverMillisecondsToTime(+pilot.totalTime)
@@ -81,7 +85,7 @@ export class RaceService {
         return {
             raceId: race.id!,
             raceFileName: race.fileName,
-            pilotsRanking,
+            pilotsRanking: newPilotsRanking,
         } as RankinInterface
 
     }
