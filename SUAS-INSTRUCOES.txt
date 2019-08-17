@@ -1,5 +1,5 @@
 1 - Ao copiar o arquivo de log disponibilizado percebi que o mesmo encontra-se desformatado.
-    Desta forma normalizei o mesmo retirando os espaços e os tabs (e também os traços) e substituindo por apenas 1 (um) espaço.
+    Desta forma o normalizei, retirando os espaços e os tabs (e também os traços), substituindo por apenas 1 (um) espaço.
 
 2 - A extensão do arquivo deverá ser *.log.
 

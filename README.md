@@ -2,8 +2,6 @@
 
 
 
-
-
 ## What is the challenge?
   
 Read [HERE](https://github.com/Gympass/interview-test)!
@@ -43,14 +41,14 @@ Read [HERE](https://github.com/Gympass/interview-test)!
 ### POST Upload Race Log
 _Don't forget to change the file path. =D_
 ```
-curl --location --request POST "localhost:3000/api/v1/races/upload" --form "raceLog=@<localPath>/race.log"
+curl --location --request POST "localhost:3000/api/v1/races/upload" --form "raceLog=@<localPath>/<filename>.log"
 ```
 
 
 
 ### GET RankingRace
 _Don't forget to change the race id. =D`_
-_You get the raceId running the command above._
+_You get the <raceId> running the command above._
 
 ```
 curl --location --request GET "localhost:3000/api/v1/races/<radeId>/ranking"
