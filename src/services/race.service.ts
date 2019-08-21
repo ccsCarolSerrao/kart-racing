@@ -8,30 +8,36 @@ import { RaceRepository } from '../repositories/race.repository'
 import { FieldConfigInterface, FileLineInterface } from '../interfaces/file.interface'
 import { RankinInterface, PilotRankinInterface } from '../interfaces/ranking.interface'
 import { TimeUtil } from '../utils/time.util'
+import { RaceRepositoryInteface } from '../repositories/race.repository.interface'
 
 export class RaceService {
+    private raceRepository: RaceRepositoryInteface
+
+    constructor() {
+        this.raceRepository = new RaceRepository()
+    }
 
     /**
      * Savr race
      * @param race Object race model
      */
-    public static async Save(race: RaceModel): Promise<RaceModel> {
-        return await new RaceRepository().Save(race)
+    public async Save(race: RaceModel): Promise<RaceModel> {
+        return await this.raceRepository.Save(race)
     }
     /**
      * Get race by file name
      * @param fileName Race file name
      */
-    public static async FindByFileName(fileName: string): Promise<RaceModel | undefined> {
-        return await new RaceRepository().FindByFileName(fileName)
+    public async FindByFileName(fileName: string): Promise<RaceModel | undefined> {
+        return await this.raceRepository.FindByFileName(fileName)
     }
 
     /**
      * Find race by id
      * @param id Race id
      */
-    public static async FindById(id: number): Promise<RaceModel | undefined> {
-        return await new RaceRepository().FindById(id)
+    public async FindById(id: number): Promise<RaceModel | undefined> {
+        return await this.raceRepository.FindById(id)
     }
 
     /**
@@ -40,7 +46,7 @@ export class RaceService {
      * @param laps Object list lap model
      * @param pilots Object list pilot model
      */
-    public static async GetRankingBayRaceId(race: RaceModel, laps: LapModel[], pilots: PilotModel[]): Promise<RankinInterface> {
+    public async GetRankingBayRaceId(race: RaceModel, laps: LapModel[], pilots: PilotModel[]): Promise<RankinInterface> {
         // Posição Chegada, Código Piloto, Nome Piloto, Qtde Voltas Completadas e Tempo Total de Prova.
         const pilotsRanking: PilotRankinInterface[] = []
         for (const pilot of pilots) {
@@ -70,8 +76,8 @@ export class RaceService {
         const pilotsRankingSorted: PilotRankinInterface[] = pilotsRanking.slice(0)
         // order by max lap and min time lap
         pilotsRankingSorted.sort((p1, p2): number => {
-            if (+p1.totalLaps >= +p2.totalLaps && +p1.totalTime < +p2.totalTime) return -1
-            if (+p1.totalLaps <= +p2.totalLaps && +p1.totalTime > +p2.totalTime) return 1
+            if (+p1.totalLaps >= +p2.totalLaps && +p1.totalTime < +p2.totalTime) { return -1 }
+            if (+p1.totalLaps <= +p2.totalLaps && +p1.totalTime > +p2.totalTime) { return 1 }
             return 0
         })
 
@@ -95,7 +101,7 @@ export class RaceService {
      * (BONUS: Saving in database)
      * @param raceLogFile Race log file
      */
-    public static ReadAndValidateFile(raceLogFile: Express.Multer.File): RaceModel {
+    public ReadAndValidateFile(raceLogFile: Express.Multer.File): RaceModel {
         const raceLog: string = fs.readFileSync(raceLogFile.path, { encoding: 'utf8' })
 
         // remove dashs, spaces and tabs
@@ -143,7 +149,7 @@ export class RaceService {
      * (BONUS: Change comman to point)
      * @param raceLog Race log file
      */
-    private static RemoveDashAndSpace(raceLog: string): string {
+    private RemoveDashAndSpace(raceLog: string): string {
         let newFile: string = raceLog
         for (const replace of FileUtil.file().replace) {
             const fileRegex: RegExp = new RegExp(replace.regex, FileUtil.file().flag)
@@ -158,7 +164,7 @@ export class RaceService {
     //  * Method to validate race log file line by regex
     //  * @param raceLogLine Race log file
     //  */
-    // private static ValidateFileLineByRegex(raceLogLine: string): boolean {
+    // private ValidateFileLineByRegex(raceLogLine: string): boolean {
     //     // mount line regex
     //     // file fields order: TIME | PILOT_CODE  | PILOT_NAME | LAP | LAP_TIME | LAP_SPEED
     //     const regexLine = new RegExp(
@@ -177,7 +183,7 @@ export class RaceService {
      * @param raceLogLine Race log file
      * @param nummberLine File line number
      */
-    private static ValidateFileLineFieldsByRegex(raceLogLine: string, nummberLine: number): FileLineInterface {
+    private ValidateFileLineFieldsByRegex(raceLogLine: string, nummberLine: number): FileLineInterface {
         // file fields order: [0] TIME | [1] PILOT_CODE | [2] PILOT_NAME | [3] LAP | [4] LAP_TIME | [5] LAP_SPEED
 
         // variable to mount file line object
@@ -207,7 +213,7 @@ export class RaceService {
      * @param field Field
      * @param regex Field config egex pattern
      */
-    private static ValidateFieldByRegex(field: string, regex: string): boolean {
+    private ValidateFieldByRegex(field: string, regex: string): boolean {
         const newRegex: RegExp = new RegExp(`^${regex}$`, FileUtil.file().flag)
         return newRegex.test(field)
     }
@@ -217,7 +223,7 @@ export class RaceService {
      * @param position Field position on field line
      * @param numberLine Field line number
      */
-    private static getFieldRegexConfigByPosition(position: number, numberLine: number)
+    private getFieldRegexConfigByPosition(position: number, numberLine: number)
         : FieldConfigInterface {
         // file fields order: [0] TIME | [1] PILOT_CODE | [2] PILOT_NAME | [3] LAP | [4] LAP_TIME | [5] LAP_SPEED
         switch (position) {

@@ -2,16 +2,16 @@ import { Request, Response, NextFunction } from 'express'
 import { PilotService } from '../services/pilot.service'
 
 export class PilotController {
-    public static Save(_req: Request, res: Response, _next: NextFunction): Response | void {
+    public Save(_req: Request, res: Response, _next: NextFunction): Response | void {
 
         return res.status(200).json({ message: 'comming soon...' })
     }
 
-    public static FindByIdAndRaceId(req: Request, res: Response, next: NextFunction): Response | void {
+    public FindByIdAndRaceId(req: Request, res: Response, next: NextFunction): Response | void {
         try {
             const raceId: number = req.query.raceId
             const pilotId: number = req.query.pilotId
-            PilotService.FindByIdAndRaceId(pilotId, raceId)
+            new PilotService().FindByIdAndRaceId(pilotId, raceId)
 
             return res.status(200).json({ message: 'comming soon...' })
         } catch (error) {
@@ -19,11 +19,11 @@ export class PilotController {
         }
     }
 
-    public static FindBestLapByIdAndRaceId(req: Request, res: Response, next: NextFunction): Response | void {
+    public FindBestLapByIdAndRaceId(req: Request, res: Response, next: NextFunction): Response | void {
         try {
             const raceId: number = req.query.raceId
             const pilotId: number = req.query.pilotId
-            PilotService.FindBestLapByIdAndRaceId(pilotId, raceId)
+            new PilotService().FindBestLapByIdAndRaceId(pilotId, raceId)
 
             return res.status(200).json({ message: 'comming soon...' })
         } catch (error) {
@@ -31,11 +31,11 @@ export class PilotController {
         }
     }
 
-    public static FindSpeedAverageByIdAndRaceId(req: Request, res: Response, next: NextFunction): Response | void {
+    public FindSpeedAverageByIdAndRaceId(req: Request, res: Response, next: NextFunction): Response | void {
         try {
             const raceId: number = req.query.raceId
             const pilotId: number = req.query.pilotId
-            PilotService.FindSpeedAverageByIdAndRaceId(pilotId, raceId)
+            new PilotService().FindSpeedAverageByIdAndRaceId(pilotId, raceId)
 
             return res.status(200).json({ message: 'comming soon...' })
         } catch (error) {
@@ -43,11 +43,11 @@ export class PilotController {
         }
     }
 
-    public static FindTimeByIdAndRaceId(req: Request, res: Response, next: NextFunction): Response | void {
+    public FindTimeByIdAndRaceId(req: Request, res: Response, next: NextFunction): Response | void {
         try {
             const raceId: number = req.query.raceId
             const pilotId: number = req.query.pilotId
-            PilotService.FindTimeByIdAndRaceId(pilotId, raceId)
+            new PilotService().FindTimeByIdAndRaceId(pilotId, raceId)
 
             return res.status(200).json({ message: 'comming soon...' })
         } catch (error) {

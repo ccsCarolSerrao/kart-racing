@@ -12,6 +12,16 @@ export namespace MessagesUtil {
         message: 'Internal Server Error - Request could not be carried out.',
     })
 
+    export const errFileExtension = () => ({
+        status: 409,
+        message: 'Race wasn\'t created. - File extesion must be "*.log"!',
+    })
+
+    export const errFileNotSent = () => ({
+        status: 409,
+        message: 'Race wasn\'t created. - File wasn\'t sent. Make sure you added file in "raceLog" field!',
+    })
+
     export const errFileExists = () => ({
         status: 409,
         message: 'Race wasn\'t created. - File already exists!',

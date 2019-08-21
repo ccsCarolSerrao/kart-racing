@@ -16,6 +16,7 @@ export interface FileConfigInterface {
     size: number
     replace: FileReplaceInterface[]
     flag: string
+    extension: string
 }
 
 export interface FieldConfigInterface {

@@ -3,12 +3,24 @@ import { Request, Response, NextFunction } from 'express'
 import { RaceModel } from '../models/race.model'
 import { MessagesUtil } from '../utils/messages.util'
 import { RankinInterface } from '../interfaces/ranking.interface'
+import { FileUtil } from '../utils/file.util'
 
 export class RaceController {
-    public static async UploadAndSave(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
+    public async UploadAndSave(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
         try {
-            const file: Express.Multer.File = req.file
-            const raceSaved: RaceModel | undefined = await RaceFacade.UploadAndSave(file)
+            const file: Express.Multer.File | undefined = req.file
+
+            if (!file) {
+                throw MessagesUtil.errFileNotSent()
+            }
+
+            // if wrong extension, throw error
+            const fileExtension: string = file.originalname.split('.')[1]
+            if (fileExtension !== FileUtil.file().extension) {
+                throw MessagesUtil.errFileExtension()
+            }
+
+            const raceSaved: RaceModel | undefined = await new RaceFacade().UploadAndSave(file)
 
             let message: MessagesUtil.MessagesUtilInterface
             if (raceSaved) {
@@ -24,10 +36,10 @@ export class RaceController {
         }
     }
 
-    public static async GetRankingByRaceId(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
+    public async GetRankingByRaceId(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
         try {
             const raceId: number = req.params.raceId
-            const ranking: RankinInterface =  await RaceFacade.GetRankingByRaceId(raceId)
+            const ranking: RankinInterface =  await new RaceFacade().GetRankingByRaceId(raceId)
 
             let message: MessagesUtil.MessagesUtilInterface
             if (ranking) {
@@ -43,10 +55,10 @@ export class RaceController {
         }
     }
 
-    public static async FindById(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
+    public async FindById(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
         try {
             const raceId: number = req.query.raceId
-            const race: RaceModel | undefined = await RaceFacade.FindById(raceId)
+            const race: RaceModel | undefined = await new RaceFacade().FindById(raceId)
 
             let message: MessagesUtil.MessagesUtilInterface
             if (race) {
@@ -62,10 +74,10 @@ export class RaceController {
         }
     }
 
-    public static FindBestLapByRaceId(req: Request, res: Response, next: NextFunction): Response | void {
+    public FindBestLapByRaceId(req: Request, res: Response, next: NextFunction): Response | void {
         try {
             const raceId: number = req.query.raceId
-            RaceFacade.FindBestLapByRaceId(raceId)
+            new RaceFacade().FindBestLapByRaceId(raceId)
 
             return res.status(200).json({ message: 'comming soon...' })
         } catch (error) {
@@ -73,10 +85,10 @@ export class RaceController {
         }
     }
 
-    public static FindPilotsByRaceId(req: Request, res: Response, next: NextFunction): Response | void {
+    public FindPilotsByRaceId(req: Request, res: Response, next: NextFunction): Response | void {
         try {
             const raceId: number = req.query.raceId
-            RaceFacade.FindPilotsByRaceId(raceId)
+            new RaceFacade().FindPilotsByRaceId(raceId)
 
             return res.status(200).json({ message: 'comming soon...' })
         } catch (error) {

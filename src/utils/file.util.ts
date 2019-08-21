@@ -14,6 +14,7 @@ export namespace FileUtil {
             },
         ],
         flag: 'gm',
+        extension: 'log'
     })
 
     export const timeField = (): FieldConfigInterface => ({
